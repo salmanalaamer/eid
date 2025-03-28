@@ -6,10 +6,16 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 // Dynamically import the AlertCircle icon with no SSR
 const AlertCircleIcon = dynamic(
   () => import("lucide-react").then((mod) => ({ default: mod.AlertCircle })),
+  { ssr: false, loading: () => null },
+);
+
+const PenSquareIcon = dynamic(
+  () => import("lucide-react").then((mod) => ({ default: mod.PenSquare })),
   { ssr: false, loading: () => null },
 );
 
@@ -29,16 +35,11 @@ const NameInputForm = ({
   useEffect(() => {
     setIsMounted(true);
   }, []);
-  // Image selection state removed as we're using a static image
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setName(value);
-
-    // Clear previous errors
     setError("");
-
-    // Basic validation for Arabic text
     if (value && !/[\u0600-\u06FF]/.test(value)) {
       setError("الرجاء إدخال اسم باللغة العربية");
     } else {
@@ -46,16 +47,20 @@ const NameInputForm = ({
     }
   };
 
-  // Image selection handler removed as we're using a static image
-
   return (
-    <div
+    <Card
       className={cn(
-        "bg-white dark:bg-slate-900 p-3 sm:p-4 md:p-6 rounded-lg shadow-md border border-orange-200 dark:border-orange-900",
+        "bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-orange-200 dark:border-orange-900 shadow-lg hover:shadow-xl transition-all duration-300",
         className,
       )}
     >
-      <div className="space-y-4 text-right" dir="rtl">
+      <CardHeader className="pb-2">
+        <CardTitle className="text-xl font-bold flex items-center gap-2 text-orange-700 dark:text-orange-300">
+          {isMounted && <PenSquareIcon className="h-6 w-6" />}
+          تخصيص البطاقة
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4 text-right" dir="rtl">
         <div className="space-y-2">
           <Label
             htmlFor="name"
@@ -70,22 +75,20 @@ const NameInputForm = ({
             onChange={handleNameChange}
             placeholder="اكتب اسمك هنا"
             className={cn(
-              "text-right placeholder:text-right border-orange-200 dark:border-orange-800 focus-visible:ring-orange-500",
+              "text-right placeholder:text-right border-orange-200 dark:border-orange-800 focus-visible:ring-orange-500 h-12 text-lg transition-all duration-200",
               error && "border-red-500 focus-visible:ring-red-500",
             )}
             dir="rtl"
           />
           {error && isMounted && (
-            <div className="flex items-center gap-2 text-red-500 text-sm mt-1">
+            <div className="flex items-center gap-2 text-red-500 text-sm mt-1 animate-fade-in">
               <AlertCircleIcon className="h-4 w-4" />
               <span>{error}</span>
             </div>
           )}
         </div>
-
-        {/* Image selection section removed as we're using a static image */}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 

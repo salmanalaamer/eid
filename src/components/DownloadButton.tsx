@@ -35,18 +35,22 @@ const DownloadButton = ({
         throw new Error("Canvas element not found");
       }
 
-      // Use the canvas directly instead of capturing the whole container
-      const canvas = canvasElement;
+      // Create a temporary canvas for the clean image
+      const tempCanvas = document.createElement("canvas");
+      const tempCtx = tempCanvas.getContext("2d");
+      if (!tempCtx) {
+        throw new Error("Could not create temporary canvas context");
+      }
 
-      // Convert to data URL with absolute maximum quality
-      // Using image/png for completely lossless quality with maximum settings
-      // The second parameter (1.0) ensures maximum quality, though for PNG it's lossless anyway
-      const dataUrl = canvas.toDataURL("image/png", 1.0);
+      // Set dimensions to match the original canvas
+      tempCanvas.width = canvasElement.width;
+      tempCanvas.height = canvasElement.height;
 
-      // For PNG format, we're using the highest quality settings possible
+      // Draw the original image
+      tempCtx.drawImage(canvasElement, 0, 0);
 
-      // For PNG format, the second parameter is ignored but we're keeping the code
-      // structured this way for consistency and future format changes if needed
+      // Convert to data URL with maximum quality
+      const dataUrl = tempCanvas.toDataURL("image/png", 1.0);
 
       // Download the image
       const element = document.createElement("a");
@@ -58,13 +62,12 @@ const DownloadButton = ({
       document.body.removeChild(element);
 
       // Show success message
-      // Using a more elegant approach than alert
       const successMessage = document.createElement("div");
       successMessage.style.position = "fixed";
       successMessage.style.top = "20px";
       successMessage.style.left = "50%";
       successMessage.style.transform = "translateX(-50%)";
-      successMessage.style.backgroundColor = "#F97316"; // Orange color
+      successMessage.style.backgroundColor = "#F97316";
       successMessage.style.color = "white";
       successMessage.style.padding = "15px 20px";
       successMessage.style.borderRadius = "5px";
@@ -74,13 +77,11 @@ const DownloadButton = ({
       successMessage.textContent = "تم تنزيل الصورة بنجاح!";
       document.body.appendChild(successMessage);
 
-      // Remove after 3 seconds
       setTimeout(() => {
         document.body.removeChild(successMessage);
       }, 3000);
     } catch (error) {
       console.error("Error downloading image:", error);
-      // Show error message with the same style as success message
       const errorMessage = document.createElement("div");
       errorMessage.style.position = "fixed";
       errorMessage.style.top = "20px";
@@ -93,11 +94,9 @@ const DownloadButton = ({
       errorMessage.style.zIndex = "1000";
       errorMessage.style.fontFamily = "IBM Plex Arabic, Arial, sans-serif";
       errorMessage.style.direction = "rtl";
-      errorMessage.textContent =
-        "حدث خطأ أثناء تنزيل الصورة. يرجى المحاولة مرة أخرى.";
+      errorMessage.textContent = "حدث خطأ أثناء تنزيل الصورة. يرجى المحاولة مرة أخرى.";
       document.body.appendChild(errorMessage);
 
-      // Remove after 3 seconds
       setTimeout(() => {
         document.body.removeChild(errorMessage);
       }, 3000);
