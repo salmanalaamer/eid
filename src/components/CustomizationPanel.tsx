@@ -61,7 +61,6 @@ const CustomizationPanel = ({
     setPosition({ ...position, y: value[0] });
   };
 
-  // State to track if component is mounted (client-side)
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -70,27 +69,27 @@ const CustomizationPanel = ({
 
   return (
     <Card
-      className="w-full bg-white dark:bg-slate-900 border border-orange-200 dark:border-orange-900 shadow-sm overflow-hidden"
+      className="w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-orange-200 dark:border-orange-900 shadow-lg hover:shadow-xl transition-all duration-300"
       dir="rtl"
     >
-      <CardHeader className="pb-3">
-        <CardTitle className="text-lg font-medium flex items-center gap-2 text-orange-700 dark:text-orange-300">
-          {isMounted && <Palette className="h-5 w-5" />}
+      <CardHeader className="pb-2">
+        <CardTitle className="text-xl font-bold flex items-center gap-2 text-orange-700 dark:text-orange-300">
+          {isMounted && <Palette className="h-6 w-6" />}
           تخصيص النص
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-2 sm:p-4 md:p-6 space-y-6">
+      <CardContent className="p-4 space-y-6">
         <div className="space-y-4 border-b border-orange-200 dark:border-orange-800 pb-4">
-          <div className="flex items-center gap-2 text-orange-700 dark:text-orange-300 mb-2">
+          <div className="flex items-center gap-2 text-orange-700 dark:text-orange-300 mb-3">
             {isMounted && <Type className="h-5 w-5" />}
-            <h3 className="font-medium">تخصيصات الخط</h3>
+            <h3 className="font-medium text-lg">تخصيصات الخط</h3>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
               <Label
                 htmlFor="font-size"
-                className="text-right text-orange-700 dark:text-orange-300"
+                className="text-right text-orange-700 dark:text-orange-300 text-base"
               >
                 حجم الخط: {fontSize}px
               </Label>
@@ -106,32 +105,32 @@ const CustomizationPanel = ({
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
               <Label
                 htmlFor="font-color"
-                className="text-right text-orange-700 dark:text-orange-300"
+                className="text-right text-orange-700 dark:text-orange-300 text-base"
               >
                 لون الخط
               </Label>
               <div
-                className="w-6 h-6 rounded-full border"
+                className="w-8 h-8 rounded-full border-2 border-orange-200 dark:border-orange-800 shadow-sm"
                 style={{ backgroundColor: fontColor }}
               />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <Input
                 id="font-color"
                 type="color"
                 value={fontColor}
                 onChange={(e) => setFontColor(e.target.value)}
-                className="w-12 h-10 p-1 cursor-pointer border-orange-200 dark:border-orange-800"
+                className="w-14 h-12 p-1 cursor-pointer border-orange-200 dark:border-orange-800 rounded-lg"
               />
               <Input
                 type="text"
                 value={fontColor}
                 onChange={(e) => setFontColor(e.target.value)}
-                className="flex-1 text-right dir-rtl border-orange-200 dark:border-orange-800 focus-visible:ring-orange-500"
+                className="flex-1 text-right dir-rtl border-orange-200 dark:border-orange-800 focus-visible:ring-orange-500 h-12 text-base"
                 placeholder="#ffffff"
                 dir="rtl"
               />
@@ -140,16 +139,16 @@ const CustomizationPanel = ({
         </div>
 
         <div className="space-y-4">
-          <div className="flex items-center gap-2 text-orange-700 dark:text-orange-300 mb-2">
+          <div className="flex items-center gap-2 text-orange-700 dark:text-orange-300 mb-3">
             {isMounted && <MoveHorizontal className="h-5 w-5" />}
-            <h3 className="font-medium">تخصيصات الموضع</h3>
+            <h3 className="font-medium text-lg">تخصيصات الموضع</h3>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
               <Label
                 htmlFor="position-x"
-                className="text-right flex items-center gap-1 text-orange-700 dark:text-orange-300"
+                className="text-right flex items-center gap-2 text-orange-700 dark:text-orange-300 text-base"
               >
                 {isMounted && <MoveHorizontal className="h-4 w-4" />}
                 الموضع الأفقي: {position.x}%
@@ -166,11 +165,11 @@ const CustomizationPanel = ({
             />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
               <Label
                 htmlFor="position-y"
-                className="text-right flex items-center gap-1 text-orange-700 dark:text-orange-300"
+                className="text-right flex items-center gap-2 text-orange-700 dark:text-orange-300 text-base"
               >
                 {isMounted && <MoveVertical className="h-4 w-4" />}
                 الموضع الرأسي: {position.y}%
