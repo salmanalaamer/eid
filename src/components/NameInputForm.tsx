@@ -1,11 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { AlertCircle } from "lucide-react";
+import dynamic from "next/dynamic";
+
+// Dynamically import the AlertCircle icon with no SSR
+const AlertCircleIcon = dynamic(
+  () => import("lucide-react").then((mod) => ({ default: mod.AlertCircle })),
+  { ssr: false, loading: () => null },
+);
 
 interface NameInputFormProps {
   onNameChange: (name: string) => void;
@@ -18,6 +24,11 @@ const NameInputForm = ({
 }: NameInputFormProps) => {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   // Image selection state removed as we're using a static image
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,9 +75,9 @@ const NameInputForm = ({
             )}
             dir="rtl"
           />
-          {error && (
+          {error && isMounted && (
             <div className="flex items-center gap-2 text-red-500 text-sm mt-1">
-              <AlertCircle className="h-4 w-4" />
+              <AlertCircleIcon className="h-4 w-4" />
               <span>{error}</span>
             </div>
           )}

@@ -18,7 +18,7 @@ const ImageNameOverlay = ({ className = "" }: ImageNameOverlayProps) => {
   const imageUrl = "/eid-photo/eid.png";
   const [fontSize, setFontSize] = useState(40);
   const [fontColor, setFontColor] = useState("#ffffff");
-  const [position, setPosition] = useState({ x: 50, y: 70 });
+  const [position, setPosition] = useState({ x: 50, y: 49 });
 
   const previewRef = useRef<HTMLDivElement>(null);
 

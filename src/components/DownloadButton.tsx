@@ -2,7 +2,14 @@
 
 import React from "react";
 import { Button } from "./ui/button";
-import { Download } from "lucide-react";
+import dynamic from "next/dynamic";
+import { useState, useEffect } from "react";
+
+// Dynamically import the Download icon with no SSR
+const DownloadIcon = dynamic(
+  () => import("lucide-react").then((mod) => ({ default: mod.Download })),
+  { ssr: false, loading: () => null },
+);
 import { cn } from "@/lib/utils";
 
 interface DownloadButtonProps {
@@ -44,10 +51,7 @@ const DownloadButton = ({
       // Download the image
       const element = document.createElement("a");
       element.setAttribute("href", dataUrl);
-      element.setAttribute(
-        "download",
-        `معايدة-مونتاجكو-${nameText}-${Date.now()}.png`,
-      );
+      element.setAttribute("download", `عيد مونتاجكو ${nameText}.png`);
       element.style.display = "none";
       document.body.appendChild(element);
       element.click();
@@ -100,6 +104,12 @@ const DownloadButton = ({
     }
   };
 
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <div className={cn("w-full max-w-xs mx-auto mt-4", className)}>
       <Button
@@ -107,7 +117,7 @@ const DownloadButton = ({
         disabled={isDisabled}
         className="w-full bg-gradient-to-r from-orange-500 to-orange-700 hover:from-orange-600 hover:to-orange-800 text-white py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg"
       >
-        <Download className="h-5 w-5" />
+        {isMounted && <DownloadIcon className="h-5 w-5" />}
         <span className="font-medium">تنزيل الصورة</span>
       </Button>
       <p className="text-center text-sm text-orange-600 mt-2 dark:text-orange-400">
