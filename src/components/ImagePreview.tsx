@@ -13,7 +13,7 @@ interface ImagePreviewProps {
 }
 
 const ImagePreview = ({
-  imageUrl = "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80", // Default image that can be replaced
+  imageUrl = "/eid-photo/eid.png", // Static image from public folder
   nameText = "اسمك هنا",
   fontSize = 40,
   textColor = "#ffffff",

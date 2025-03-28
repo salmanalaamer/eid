@@ -19,7 +19,7 @@ interface CustomizationPanelProps {
 }
 
 const CustomizationPanel = ({
-  fontSize = 32,
+  fontSize = 60,
   setFontSize = () => {},
   fontColor = "#ffffff",
   setFontColor = () => {},
@@ -80,7 +80,7 @@ const CustomizationPanel = ({
               <Slider
                 id="font-size"
                 min={12}
-                max={100}
+                max={150}
                 step={1}
                 value={[fontSize]}
                 onValueChange={handleFontSizeChange}

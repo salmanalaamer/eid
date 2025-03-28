@@ -14,15 +14,11 @@ interface ImageNameOverlayProps {
 
 const ImageNameOverlay = ({ className = "" }: ImageNameOverlayProps) => {
   const [name, setName] = useState("اسمك هنا");
-  const [imageUrl, setImageUrl] = useState<string>(
-    "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800&q=80",
-  );
-  // Default image that can be replaced by user upload
+  // Using static image from public folder
+  const imageUrl = "/eid-photo/eid.png";
   const [fontSize, setFontSize] = useState(40);
   const [fontColor, setFontColor] = useState("#ffffff");
   const [position, setPosition] = useState({ x: 50, y: 70 });
-
-  const [isImageSelected, setIsImageSelected] = useState(true); // Set to true since we have a default image
 
   const previewRef = useRef<HTMLDivElement>(null);
 
@@ -30,17 +26,7 @@ const ImageNameOverlay = ({ className = "" }: ImageNameOverlayProps) => {
     setName(newName || "اسمك هنا");
   };
 
-  const handleImageSelect = (file: File) => {
-    // Create a FileReader to read the file as a data URL for high quality
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      if (e.target?.result) {
-        setImageUrl(e.target.result as string);
-        setIsImageSelected(true);
-      }
-    };
-    reader.readAsDataURL(file);
-  };
+  // Image selection functionality removed as we're using a static image
 
   // This function is not used, we're using the one in DownloadButton component instead
 
@@ -52,10 +38,7 @@ const ImageNameOverlay = ({ className = "" }: ImageNameOverlayProps) => {
         <CardContent className="p-3 sm:p-4 md:p-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             <div className="space-y-6">
-              <NameInputForm
-                onNameChange={handleNameChange}
-                onImageSelect={handleImageSelect}
-              />
+              <NameInputForm onNameChange={handleNameChange} />
 
               <CustomizationPanel
                 fontSize={fontSize}
@@ -81,7 +64,7 @@ const ImageNameOverlay = ({ className = "" }: ImageNameOverlayProps) => {
                 <DownloadButton
                   imageRef={previewRef}
                   nameText={name}
-                  isDisabled={!isImageSelected || !name}
+                  isDisabled={!name}
                   className="mt-4"
                 />
               </div>
@@ -106,7 +89,7 @@ const ImageNameOverlay = ({ className = "" }: ImageNameOverlayProps) => {
                 <DownloadButton
                   imageRef={previewRef}
                   nameText={name}
-                  isDisabled={!isImageSelected || !name}
+                  isDisabled={!name}
                 />
               </div>
             </div>

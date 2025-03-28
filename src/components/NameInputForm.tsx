@@ -9,18 +9,16 @@ import { AlertCircle } from "lucide-react";
 
 interface NameInputFormProps {
   onNameChange: (name: string) => void;
-  onImageSelect: (file: File) => void;
   className?: string;
 }
 
 const NameInputForm = ({
   onNameChange = () => {},
-  onImageSelect = () => {},
   className,
 }: NameInputFormProps) => {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  // Image selection state removed as we're using a static image
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -37,13 +35,7 @@ const NameInputForm = ({
     }
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setSelectedImage(file);
-      onImageSelect(file);
-    }
-  };
+  // Image selection handler removed as we're using a static image
 
   return (
     <div
@@ -80,27 +72,7 @@ const NameInputForm = ({
           )}
         </div>
 
-        <div className="space-y-2">
-          <Label
-            htmlFor="image"
-            className="text-right block text-lg font-medium text-orange-700 dark:text-orange-300"
-          >
-            اختر صورة
-          </Label>
-          <div className="flex flex-col items-end gap-2">
-            <Input
-              id="image"
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="text-right file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-orange-600 file:text-white hover:file:bg-orange-700 border-orange-200 dark:border-orange-800"
-              dir="rtl"
-            />
-            <p className="text-sm text-orange-600 dark:text-orange-400 text-right">
-              اختر صورة عالية الجودة للحصول على أفضل النتائج
-            </p>
-          </div>
-        </div>
+        {/* Image selection section removed as we're using a static image */}
       </div>
     </div>
   );

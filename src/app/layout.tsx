@@ -12,6 +12,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "معايدة مونتاجكو لعيد الفطر المبارك",
   description: "أداة لإضافة اسمك على صور معايدة عيد الفطر وتنزيلها",
+  icons: {
+    icon: "/logo-orange.png",
+  },
 };
 
 export default function RootLayout({
@@ -21,10 +24,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/logo-orange.png" />
-        {/* Using local IBM Plex Arabic font */}
-      </head>
       <body className="font-ibm-plex-arabic">
         <Script src="https://api.tempolabs.ai/proxy-asset?url=https://storage.googleapis.com/tempo-public-assets/error-handling.js" />
         {children}
