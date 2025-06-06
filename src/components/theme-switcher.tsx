@@ -38,6 +38,7 @@ const ThemeSwitcher = () => {
             width={20}
             height={20}
             className="object-contain"
+            priority
             style={{ width: "auto", height: "auto" }}
           />
         </Button>

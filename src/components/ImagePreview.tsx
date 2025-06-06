@@ -13,10 +13,10 @@ interface ImagePreviewProps {
 }
 
 const ImagePreview = ({
-  imageUrl = "/eid-photo/eid.png", // Static image from public folder
+  imageUrl = "/eid-photo/eid-story.png", // Static image from public folder
   nameText = "اسمك هنا",
   fontSize = 40,
-  textColor = "#ffffff",
+  textColor = "#F06045",
   textPosition = { x: 50, y: 70 },
   rtl = true,
 }: ImagePreviewProps) => {

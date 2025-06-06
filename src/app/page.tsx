@@ -19,11 +19,13 @@ export default function Home() {
                 alt="مونتاجكو"
                 width={100}
                 height={100}
+                priority
+                className="object-contain"
               />
             </div>
             <div className="text-center flex-1 order-2 sm:order-none">
               <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-orange-600 dark:text-orange-400 mb-2 sm:mb-3">
-                معايدة مونتاجكو لعيد الفطر المبارك
+                معايدة مونتاجكو لعيد الأضحى المبارك
               </h1>
               <p
                 className="text-lg text-orange-700 dark:text-orange-300"

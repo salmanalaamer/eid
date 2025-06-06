@@ -15,10 +15,10 @@ interface ImageNameOverlayProps {
 const ImageNameOverlay = ({ className = "" }: ImageNameOverlayProps) => {
   const [name, setName] = useState("اسمك هنا");
   // Using static image from public folder
-  const imageUrl = "/eid-photo/eid.png";
+  const imageUrl = "/eid-photo/eid-story.png";
   const [fontSize, setFontSize] = useState(40);
-  const [fontColor, setFontColor] = useState("#ffffff");
-  const [position, setPosition] = useState({ x: 50, y: 49 });
+  const [fontColor, setFontColor] = useState("#F06045");
+  const [position, setPosition] = useState({ x: 58, y: 77 });
 
   const previewRef = useRef<HTMLDivElement>(null);
 

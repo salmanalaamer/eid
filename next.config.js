@@ -14,7 +14,6 @@ const nextConfig = {
   },
   // Explicitly exclude tempobook directory from the build
   distDir: ".next",
-  output: "standalone",
   experimental: {
     outputFileTracingExcludes: {
       "*": ["**/tempobook/**"],

@@ -44,7 +44,7 @@ interface CustomizationPanelProps {
 const CustomizationPanel = ({
   fontSize = 60,
   setFontSize = () => {},
-  fontColor = "#ffffff",
+  fontColor = "#F06045",
   setFontColor = () => {},
   position = { x: 50, y: 49 },
   setPosition = () => {},
